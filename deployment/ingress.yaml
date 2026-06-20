@@ -1,0 +1,16 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: medas-financial-reporting
+spec:
+  rules:
+    - host: user-fabienhos.lab.sspcloud.fr
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: medas-financial-reporting
+                port:
+                  number: 80

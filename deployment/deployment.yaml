@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: medas-financial-reporting
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: medas-financial-reporting
+  template:
+    metadata:
+      labels:
+        app: medas-financial-reporting
+    spec:
+      containers:
+        - name: medas-financial-reporting
+          image: surybang/medas_financial_reporting:latest
+          ports:
+            - containerPort: 8501
+          env:
+            - name: AWS_S3_ENDPOINT
+              value: "minio.lab.sspcloud.fr"
+            - name: S3_BUCKET
+              value: "surybang"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: access-key
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: secret-key
+            - name: AWS_SESSION_TOKEN
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: session-token

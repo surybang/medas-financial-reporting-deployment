@@ -1,0 +1,16 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: medas-financial-reporting
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/surybang/medas-financial-reporting-deployment.git  # votre dépôt GitOps
+    targetRevision: main          # la branche à déployer
+    path: deployment              # le dossier contenant les manifests
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: user-fabienhos     # votre namespace, de la forme user-<username>
+  syncPolicy:
+    automated:
+      selfHeal: true
