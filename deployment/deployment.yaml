@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: medas-financial-reporting
-          image: surybang/medas_financial_reporting:latest
+          image: surybang/medas-financial-reporting:latest
           ports:
             - containerPort: 8501
           env:
