@@ -2,9 +2,14 @@ apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: medas-financial-reporting
+
 spec:
+  ingressClassName: nginx
+  tls:
+    - hosts:
+      - medas-financial-reporting.lab.sspcloud.fr
   rules:
-    - host: user-fabienhos.lab.sspcloud.fr
+    - host: medas-financial-reporting.lab.sspcloud.fr
       http:
         paths:
           - path: /
