@@ -15,7 +15,7 @@ spec:
       containers:
         - name: minio
           image: minio/minio:latest
-          args: ["server", "/data", "--console-address", ":9001"]
+          args: ["server", "/data"]
           env:
             - name: MINIO_ROOT_USER
               valueFrom:
@@ -29,7 +29,6 @@ spec:
                   key: secret-key
           ports:
             - containerPort: 9000
-            - containerPort: 9001
           volumeMounts:
             - name: data
               mountPath: /data
@@ -48,6 +47,3 @@ spec:
     - name: api
       port: 9000
       targetPort: 9000
-    - name: console
-      port: 9001
-      targetPort: 9001
