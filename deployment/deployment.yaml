@@ -14,14 +14,14 @@ spec:
     spec:
       containers:
         - name: medas-financial-reporting
-          image: surybang/medas-financial-reporting:latest
+          image: surybang/medas_financial_reporting:latest
           ports:
             - containerPort: 8501
           env:
             - name: AWS_S3_ENDPOINT
-              value: "minio.lab.sspcloud.fr"
+              value: "http://minio-medas-usid0f:9000"
             - name: S3_BUCKET
-              value: "surybang"
+              value: "medas"
             - name: AWS_ACCESS_KEY_ID
               valueFrom:
                 secretKeyRef:
@@ -32,8 +32,3 @@ spec:
                 secretKeyRef:
                   name: minio-credentials
                   key: secret-key
-            - name: AWS_SESSION_TOKEN
-              valueFrom:
-                secretKeyRef:
-                  name: minio-credentials
-                  key: session-token
