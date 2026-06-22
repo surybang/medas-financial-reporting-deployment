@@ -1,0 +1,28 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: medas-reporting-pipeline
+spec:
+  backoffLimit: 2
+  template:
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: reporting
+          image: surybang/medas-financial-reporting:latest
+          command: ["uv", "run", "reporting"]
+          env:
+            - name: AWS_S3_ENDPOINT
+              value: "http://minio-medas-usid0f:9000"
+            - name: S3_BUCKET
+              value: "medas"
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: access-key
+            - name: AWS_SECRET_ACCESS_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: minio-credentials
+                  key: secret-key
