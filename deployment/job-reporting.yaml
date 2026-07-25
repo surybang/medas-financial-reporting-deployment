@@ -9,7 +9,7 @@ spec:
       restartPolicy: Never
       containers:
         - name: reporting
-          image: surybang/medas-financial-reporting:latest
+          image: surybang/medas-financial-reporting:v1.0.0
           command: ["uv", "run", "reporting"]
           env:
             - name: AWS_S3_ENDPOINT
